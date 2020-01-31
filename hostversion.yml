@@ -2,16 +2,19 @@
   hosts: localhost
   connection: local
   gather_facts: False
-  
+  vars:
+    provider:
+        ip_address: 192.168.32.130
+        username: admin
+        password: admin
+
   roles:
     - role: PaloAltoNetworks.paloaltonetworks
 
   tasks:
     - name: Get facts PANOS
       panos_facts:
-        ip_address: 192.168.32.130
-        username: admin
-        password: admin
+        provider: '{{ provider }}'
         gather_subset: all
 
     - name: Display hostname and version
