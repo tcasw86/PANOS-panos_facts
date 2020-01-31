@@ -1,0 +1,19 @@
+- name: PAN Hostname Version Playbook
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+    - name: Get facts PANOS
+      panos_facts:
+        ip_address: 192.168.32.130
+        username: admin
+        password: admin
+        gather_subset: all
+
+    - name: Display hostname and version
+      debug:
+        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
